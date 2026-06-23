@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KPS Energy - Soluciones de energía solar y almacenamiento diseñadas para hogares, empresas e industrias en Argentina.">
+    <title>KPS Energy - Generá tu propia energía</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- WhatsApp flotante -->
+    <a href="https://wa.me/5491100000000" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- Modal Oferta Limitada -->
+    <div class="modal-overlay" id="ofertaModal">
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+            <div class="modal-badge">OFERTA LIMITADA – 50% OFF</div>
+            <div class="modal-body">
+                <h2 class="modal-title">Energía de respaldo<br>para tu Hogar</h2>
+                <p class="modal-subtitle">Energía de respaldo para consumos esenciales</p>
+                <h4 class="green bold">Ideal para mantener funcionando:</h4>
+                <div class="appliances-grid">
+                    <div class="appliance">
+                        <span class="appliance-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="20" height="20"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M5 8h14"/></svg>
+                        </span>
+                        <span>1 Heladera</span>
+                    </div>
+                    <div class="appliance">
+                        <span class="appliance-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="20" height="20"><path d="M9 18h6M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/></svg>
+                        </span>
+                        <span>2 Lámparas LED</span>
+                    </div>
+                    <div class="appliance">
+                        <span class="appliance-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="20" height="20"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round" stroke-width="3"/></svg>
+                        </span>
+                        <span>Cargador de Celular</span>
+                    </div>
+                    <div class="appliance">
+                        <span class="appliance-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="20" height="20"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        </span>
+                        <span>Notebook</span>
+                    </div>
+                </div>
+                <div class="offer-products">
+                    <div class="offer-product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>1x Panel Q.CELLS 395W</span>
+                    </div>
+                    <div class="offer-product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="16" height="16"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <span>1x Luminous PCU 1KW (Off Grid)</span>
+                    </div>
+                    <div class="offer-product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+                        <span>1x Intermepro Cristal Piomo</span>
+                    </div>
+                    <div class="offer-product">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Instalación, Obra, Logística: a definir</span>
+                    </div>
+                </div>
+                <div class="offer-price-block">
+                    <p>Costo preliminar estimado para 6 horas de autonomía:</p>
+                    <div class="offer-price">USD 2819</div>
+                </div>
+                <p class="offer-promo green">Consultá por esta promoción especial. Asesoramiento sin costo.</p>
+                <a href="#contacto" class="btn btn-primary btn-full" id="modalCta">Consultar por este kit</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="#inicio" class="logo">
+                <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
+                    <circle cx="25" cy="9" r="3.5" fill="#3AB54A"/>
+                    <circle cx="37" cy="16" r="3.5" fill="#3AB54A"/>
+                    <circle cx="37" cy="34" r="3.5" fill="#3AB54A"/>
+                    <circle cx="25" cy="41" r="3.5" fill="#3AB54A"/>
+                    <circle cx="13" cy="34" r="3.5" fill="#3AB54A"/>
+                    <circle cx="13" cy="16" r="3.5" fill="#3AB54A"/>
+                    <circle cx="25" cy="25" r="5" fill="#3AB54A"/>
+                    <line x1="25" y1="20.5" x2="25" y2="12.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="29.5" y1="22.5" x2="33.7" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="29.5" y1="27.5" x2="33.7" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="25" y1="29.5" x2="25" y2="37.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="20.5" y1="27.5" x2="16.3" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="20.5" y1="22.5" x2="16.3" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                </svg>
+                <span class="logo-text"><strong>KPS</strong><span class="logo-green">Energy</span></span>
+            </a>
+
+            <nav class="nav" id="desktopNav">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="#empresa" class="nav-link">Empresa</a>
+                <a href="#soluciones" class="nav-link">Soluciones</a>
+                <a href="#productos" class="nav-link">Productos</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#calculadora" class="nav-link">Calculadora Solar</a>
+                <a href="#contacto" class="btn btn-primary btn-sm">Asesoramiento Sin Cargo</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menú Móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="#inicio" class="logo">
+                <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+                    <circle cx="25" cy="9" r="3.5" fill="#3AB54A"/>
+                    <circle cx="37" cy="16" r="3.5" fill="#3AB54A"/>
+                    <circle cx="37" cy="34" r="3.5" fill="#3AB54A"/>
+                    <circle cx="25" cy="41" r="3.5" fill="#3AB54A"/>
+                    <circle cx="13" cy="34" r="3.5" fill="#3AB54A"/>
+                    <circle cx="13" cy="16" r="3.5" fill="#3AB54A"/>
+                    <circle cx="25" cy="25" r="5" fill="#3AB54A"/>
+                    <line x1="25" y1="20.5" x2="25" y2="12.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="29.5" y1="22.5" x2="33.7" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="29.5" y1="27.5" x2="33.7" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="25" y1="29.5" x2="25" y2="37.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="20.5" y1="27.5" x2="16.3" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                    <line x1="20.5" y1="22.5" x2="16.3" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                </svg>
+                <span class="logo-text"><strong>KPS</strong><span class="logo-green">Energy</span></span>
+            </a>
+            <button class="mobile-close" id="mobileClose" aria-label="Cerrar menú">✕</button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#inicio" class="mobile-nav-link">Inicio</a>
+            <a href="#empresa" class="mobile-nav-link">Empresa</a>
+            <a href="#soluciones" class="mobile-nav-link">Soluciones</a>
+            <a href="#productos" class="mobile-nav-link">Productos</a>
+            <a href="#blog" class="mobile-nav-link">Blog</a>
+            <a href="#calculadora" class="mobile-nav-link">Calculadora Solar</a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <a href="#contacto" class="btn btn-primary btn-full">Asesoramiento Sin Cargo</a>
+        </div>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <p class="section-tag">NUEVA GENERACIÓN DE ENERGÍA</p>
+            <h1 class="hero-title">Generá tu<br>propia<br>energía</h1>
+            <p class="hero-text">Soluciones de energía solar y almacenamiento diseñadas para hogares, empresas e industrias en Argentina. Reducí costos, ganá autonomía y sumá tecnología a tu forma de consumir energía.</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn btn-primary btn-lg">Solicitar asesoramiento sin costo</a>
+                <a href="#soluciones" class="btn btn-outline-white btn-lg">Ver Soluciones</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="section why-us" id="empresa">
+        <div class="container">
+            <div class="section-header centered">
+                <p class="section-tag green">POR QUÉ ELEGIRNOS</p>
+                <h2>Una nueva forma de<br>producir energía</h2>
+                <p class="section-subtitle">En Argentina, la energía solar es la herramienta clave para la eficiencia, el ahorro y la modernización de infraestructura.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3>Ahorro energético</h3>
+                    <p>Reducí significativamente tu factura eléctrica generando parte de tu propia energía y amortizá la inversión.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3>Autonomía energética</h3>
+                    <p>Reducí la dependencia de la red y ganá estabilidad frente a aumentos tarifarios o interrupciones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <h3>Monitoreo inteligente</h3>
+                    <p>Visualizá en tiempo real la generación y el consumo desde cualquier dispositivo con nuestras plataformas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3AB54A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Sustentabilidad Real</h3>
+                    <p>Mejorá la eficiencia operativa y posicioná tu marca u hogar frente al futuro energético del país.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestras Soluciones -->
+    <section class="section bg-light" id="soluciones">
+        <div class="container">
+            <div class="section-header centered">
+                <p class="section-tag green">NUESTRAS SOLUCIONES</p>
+                <h2>Energía adaptada<br>a cada necesidad</h2>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-img">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" alt="Casa moderna con paneles solares" loading="lazy">
+                    </div>
+                    <div class="solution-body">
+                        <h3>Hogares</h3>
+                        <p>Reducí el gasto energético y aumentá la independencia en barrios cerrados y zonas residenciales.</p>
+                        <a href="#contacto" class="ver-mas">Ver más →</a>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-img">
+                        <img src="https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?auto=format&fit=crop&w=800&q=80" alt="Empresa con paneles solares" loading="lazy">
+                    </div>
+                    <div class="solution-body">
+                        <h3>Empresas & PyMEs</h3>
+                        <p>Transformá superficies ociosas en activos energéticos y optimizá tus costos operativos industriales.</p>
+                        <a href="#contacto" class="ver-mas">Ver más →</a>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-img">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80" alt="Instalación solar industrial y agro" loading="lazy">
+                    </div>
+                    <div class="solution-body">
+                        <h3>Industria & Agro</h3>
+                        <p>Bombeo solar y soluciones de gran escala para establecimientos rurales y galpones productivos.</p>
+                        <a href="#contacto" class="ver-mas">Ver más →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadora Solar -->
+    <section class="section bg-dark" id="calculadora">
+        <div class="container centered">
+            <h2 class="white">Descubrí cuánto<br>podrías ahorrar</h2>
+            <p class="calc-subtitle">Ingresá tus datos de consumo y obtené una estimación preliminar del sistema solar ideal para vos.</p>
+            <a href="#contacto" class="btn btn-primary btn-lg">Ver Novedades de la Calculadora</a>
+        </div>
+    </section>
+
+    <!-- Partner FinexPro -->
+    <section class="section partners" id="blog">
+        <div class="container">
+            <div class="partner-wrap">
+                <div class="partner-logo-block">
+                    <svg viewBox="0 0 32 32" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="16,1 30,9 30,23 16,31 2,23 2,9" fill="#FF6B35"/>
+                        <polygon points="16,8 24,13 24,19 16,24 8,19 8,13" fill="white"/>
+                    </svg>
+                    <span class="partner-name"><strong>Finex</strong><span class="orange">Pro</span></span>
+                </div>
+                <p class="partner-desc">Finexpro es nuestro partner estratégico en soluciones de financiamiento para que puedas acceder a tu sistema solar de forma accesible y con cuotas adaptadas a tu situación económica.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto / Footer -->
+    <footer class="footer" id="contacto">
+        <div class="container footer-top">
+            <div class="footer-brand">
+                <div class="logo footer-logo">
+                    <svg class="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
+                        <circle cx="25" cy="9" r="3.5" fill="#3AB54A"/>
+                        <circle cx="37" cy="16" r="3.5" fill="#3AB54A"/>
+                        <circle cx="37" cy="34" r="3.5" fill="#3AB54A"/>
+                        <circle cx="25" cy="41" r="3.5" fill="#3AB54A"/>
+                        <circle cx="13" cy="34" r="3.5" fill="#3AB54A"/>
+                        <circle cx="13" cy="16" r="3.5" fill="#3AB54A"/>
+                        <circle cx="25" cy="25" r="5" fill="#3AB54A"/>
+                        <line x1="25" y1="20.5" x2="25" y2="12.5" stroke="#3AB54A" stroke-width="2"/>
+                        <line x1="29.5" y1="22.5" x2="33.7" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                        <line x1="29.5" y1="27.5" x2="33.7" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                        <line x1="25" y1="29.5" x2="25" y2="37.5" stroke="#3AB54A" stroke-width="2"/>
+                        <line x1="20.5" y1="27.5" x2="16.3" y2="30.5" stroke="#3AB54A" stroke-width="2"/>
+                        <line x1="20.5" y1="22.5" x2="16.3" y2="19.5" stroke="#3AB54A" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p>Especialistas en soluciones de energía renovable, ingeniería y tecnología para la nueva era energética en Argentina.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <a href="#empresa">Sobre Nosotros</a>
+                <a href="#soluciones">Nuestras Soluciones</a>
+                <a href="#blog">Blog & Novedades</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Soluciones</h4>
+                <a href="#soluciones">Residencial</a>
+                <a href="#soluciones">Comercial & PyME</a>
+                <a href="#soluciones">Industrial & Agro</a>
+                <a href="#calculadora">Calculadora Solar</a>
+            </div>
+            <div class="footer-col">
+                <h4>Seguinos</h4>
+                <a href="#" target="_blank" rel="noopener">Instagram</a>
+                <a href="#" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 KPS Energy. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
