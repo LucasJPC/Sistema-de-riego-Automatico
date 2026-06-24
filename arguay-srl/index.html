@@ -197,8 +197,16 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/hero-bg.jpg') center/cover no-repeat;
-      opacity: .22;
+      /* Reemplazar url() con la imagen real cuando esté disponible */
+      background:
+        url('assets/hero-bg.jpg') center/cover no-repeat,
+        linear-gradient(160deg,
+          #0a1628 0%,
+          #1a3a6e 35%,
+          #c27a1a 70%,
+          #e8a020 100%
+        );
+      opacity: .28;
     }
     .hero-gradient {
       position: absolute;
@@ -421,13 +429,11 @@
       position: relative;
       cursor: pointer;
     }
-    .proyecto-card img {
+    .proyecto-img {
       width: 100%;
-      height: 300px;
-      object-fit: cover;
       transition: transform .5s var(--ease);
     }
-    .proyecto-card:hover img { transform: scale(1.06); }
+    .proyecto-card:hover .proyecto-img { transform: scale(1.06); }
     .proyecto-overlay {
       position: absolute;
       inset: 0;
@@ -439,7 +445,7 @@
       opacity: 0;
       transition: opacity var(--t) var(--ease);
     }
-    .proyecto-card:hover .proyecto-overlay { opacity: 1; }
+    .proyecto-card:hover .proyecto-overlay { opacity: 1 !important; }
     .proyecto-cat {
       font-size: .75rem;
       font-weight: 700;
@@ -460,6 +466,20 @@
       text-transform: uppercase;
       padding: 4px 12px;
       border-radius: 99px;
+    }
+    /* Fondos de color como fallback cuando no hay imagen */
+    .proyecto-card img[src="assets/proyecto-agro.jpg"],
+    img.proyecto-fallback-agro {
+      background: linear-gradient(135deg, #3a7d2c 0%, #7ab648 40%, #a8d87a 70%, #ddf09a 100%);
+    }
+    .img-fallback-agro {
+      background: linear-gradient(155deg, #2d6e1f 0%, #5aaa3c 45%, #8dd96e 75%, #c5f0a4 100%);
+    }
+    .img-fallback-residencial {
+      background: linear-gradient(135deg, #c8d8e8 0%, #e8f0f8 35%, #a0bcd4 60%, #6895ba 100%);
+    }
+    .img-fallback-industrial {
+      background: linear-gradient(135deg, #4a5568 0%, #718096 40%, #a0aec0 70%, #cbd5e0 100%);
     }
 
     /* ========== CLIENTES ========== */
@@ -1041,7 +1061,11 @@
       </div>
       <div class="reveal">
         <div class="porque-img-wrap">
-          <img src="assets/porque.jpg" alt="Instalación solar residencial ARGUAY SRL" loading="lazy" />
+          <div style="
+            width:100%; height:520px; border-radius:20px;
+            background: url('assets/porque.jpg') center/cover no-repeat,
+                        linear-gradient(145deg,#b8cde0 0%,#dce8f4 30%,#a0bcd4 55%,#2d6e90 100%);
+          "></div>
           <div class="porque-badge">
             <div class="porque-badge-icon"><i class="fas fa-shield-alt"></i></div>
             <div>
@@ -1068,24 +1092,39 @@
     <div class="proyectos-grid">
       <div class="proyecto-card reveal">
         <span class="proyecto-tag">Agropecuario</span>
-        <img src="assets/proyecto-agro.jpg" alt="Sistema solar agropecuario con bombeo" loading="lazy" />
-        <div class="proyecto-overlay">
+        <div class="proyecto-img" style="
+          height:300px;
+          background: url('assets/proyecto-agro.jpg') center/cover no-repeat,
+                      linear-gradient(155deg,#2d5a1b 0%,#4a8a30 30%,#7ab648 60%,#b8e07a 100%);
+          transition: transform .5s cubic-bezier(.22,1,.36,1);
+        "></div>
+        <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
           <div class="proyecto-cat">Bombeo solar · Córdoba</div>
           <h3>Establecimiento ganadero 24 kWp</h3>
         </div>
       </div>
       <div class="proyecto-card reveal">
         <span class="proyecto-tag">Residencial</span>
-        <img src="assets/proyecto-residencial.jpg" alt="Casa con paneles solares" loading="lazy" />
-        <div class="proyecto-overlay">
+        <div class="proyecto-img" style="
+          height:300px;
+          background: url('assets/proyecto-residencial.jpg') center/cover no-repeat,
+                      linear-gradient(155deg,#b8cde0 0%,#dce8f4 35%,#a8c4dc 60%,#6a9cbc 100%);
+          transition: transform .5s cubic-bezier(.22,1,.36,1);
+        "></div>
+        <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
           <div class="proyecto-cat">On-grid · Buenos Aires</div>
           <h3>Vivienda premium 12 kWp</h3>
         </div>
       </div>
       <div class="proyecto-card reveal">
         <span class="proyecto-tag">Industrial</span>
-        <img src="assets/proyecto-industrial.jpg" alt="Parque industrial con paneles solares" loading="lazy" />
-        <div class="proyecto-overlay">
+        <div class="proyecto-img" style="
+          height:300px;
+          background: url('assets/proyecto-industrial.jpg') center/cover no-repeat,
+                      linear-gradient(155deg,#3a4a58 0%,#5a7080 35%,#8aa0b0 60%,#b8ccd8 100%);
+          transition: transform .5s cubic-bezier(.22,1,.36,1);
+        "></div>
+        <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
           <div class="proyecto-cat">Gran escala · Pilar</div>
           <h3>Parque industrial 500 kWp</h3>
         </div>
