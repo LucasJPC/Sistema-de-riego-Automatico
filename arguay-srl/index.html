@@ -477,37 +477,6 @@
       background: linear-gradient(135deg, #4a5568 0%, #718096 40%, #a0aec0 70%, #cbd5e0 100%);
     }
 
-    /* ========== CLIENTES ========== */
-    #clientes { background: var(--gris-bg); padding: 64px 0; }
-    .clientes-titulo {
-      text-align: center;
-      font-size: .85rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gris-texto);
-      margin-bottom: 40px;
-    }
-    .clientes-track-wrap { overflow: hidden; }
-    .clientes-track {
-      display: flex;
-      gap: 64px;
-      align-items: center;
-      animation: slide 22s linear infinite;
-      width: max-content;
-    }
-    .clientes-track img {
-      height: 36px;
-      width: auto;
-      filter: grayscale(1);
-      opacity: .5;
-      transition: filter .3s, opacity .3s;
-    }
-    .clientes-track img:hover { filter: none; opacity: 1; }
-    @keyframes slide {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
 
     /* ========== PROCESO ========== */
     #proceso { background: var(--blanco); }
@@ -1132,27 +1101,6 @@
   </div>
 </section>
 
-<!-- ===================== CLIENTES ===================== -->
-<section id="clientes" class="section-sm">
-  <div class="container">
-    <p class="clientes-titulo">Empresas que confían en ARGUAY SRL</p>
-    <div class="clientes-track-wrap">
-      <div class="clientes-track">
-        <img src="assets/logo-finexpro.png" alt="FinexPro" />
-        <img src="assets/logo-intermepro.png" alt="Intermepro" />
-        <img src="assets/logo-finexpro.png" alt="FinexPro" />
-        <img src="assets/logo-intermepro.png" alt="Intermepro" />
-        <img src="assets/logo-finexpro.png" alt="FinexPro" />
-        <img src="assets/logo-intermepro.png" alt="Intermepro" />
-        <!-- duplicados para loop infinito -->
-        <img src="assets/logo-finexpro.png" alt="FinexPro" />
-        <img src="assets/logo-intermepro.png" alt="Intermepro" />
-        <img src="assets/logo-finexpro.png" alt="FinexPro" />
-        <img src="assets/logo-intermepro.png" alt="Intermepro" />
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== PROCESO ===================== -->
 <section id="proceso" class="section">
