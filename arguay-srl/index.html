@@ -521,9 +521,15 @@
     #testimonios { background: var(--gris-bg); }
     .testimonios-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
       margin-top: 48px;
+    }
+    @media (max-width: 1024px) {
+      .testimonios-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .testimonios-grid { grid-template-columns: 1fr; }
     }
     .testimonio-card {
       background: var(--blanco);
@@ -1143,39 +1149,91 @@
       <h2 class="h2">Lo que dicen nuestros clientes</h2>
     </div>
     <div class="testimonios-grid">
+
       <div class="testimonio-card reveal">
         <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>"Instalaron un sistema de 8 kW en nuestra casa. La factura de luz bajó de $180.000 a $18.000 por mes. La instalación fue limpia y rápida, en dos días estaba todo listo."</p>
+        <p>"Excelente empresa de energías renovables! 100% recomendable! Te guían, te asesoran a la hora de realizar una inversión para generar energía mediante el uso de paneles solares, además de realizar proyectos eléctricos completos y sus mantenimientos posteriores en hogares, campos e industrias."</p>
         <div class="testimonio-autor">
-          <div class="autor-avatar">MR</div>
+          <div class="autor-avatar">HA</div>
           <div>
-            <div class="autor-nombre">Marcelo R.</div>
-            <div class="autor-cargo">Propietario · Zona Norte, Buenos Aires</div>
+            <div class="autor-nombre">Hernán Armoao</div>
+            <div class="autor-cargo">febrero 2025</div>
           </div>
         </div>
       </div>
+
       <div class="testimonio-card reveal">
         <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>"Para nuestro campo en Córdoba era imposible conectar a la red. ARGUAY nos diseñó un sistema off-grid con baterías que funciona perfecto. Bombeo solar y luz para todo el tambo."</p>
+        <p>"Instalé paneles solares para bajar la factura de EPE, en el primer programa PROSUMIDORES, me dio resultado hace 5 años sin tener problemas. Ahora voy a aumentar mi potencia instalada para seguir generando ahorros. Estamos muy conformes con su trabajo y seriedad. Recomiendo esta empresa."</p>
         <div class="testimonio-autor">
-          <div class="autor-avatar">LG</div>
+          <div class="autor-avatar">LR</div>
           <div>
-            <div class="autor-nombre">Laura G.</div>
-            <div class="autor-cargo">Productora agropecuaria · Córdoba</div>
+            <div class="autor-nombre">Leandro Rodriguez</div>
+            <div class="autor-cargo">junio 2024</div>
           </div>
         </div>
       </div>
+
       <div class="testimonio-card reveal">
         <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>"Nuestra planta industrial consumía una fortuna. Con los 200 kW instalados por ARGUAY recuperamos la inversión en 4 años y el equipo de monitoreo es excelente."</p>
+        <p>"Instalé paneles solares, un éxito, responsabilidad, respuesta rápida, son serios. Lo recomiendo!"</p>
         <div class="testimonio-autor">
-          <div class="autor-avatar">JP</div>
+          <div class="autor-avatar">VB</div>
           <div>
-            <div class="autor-nombre">Juan Pablo M.</div>
-            <div class="autor-cargo">Director de operaciones · Parque Industrial Pilar</div>
+            <div class="autor-nombre">Virginia Borchese</div>
+            <div class="autor-cargo">junio 2024</div>
           </div>
         </div>
       </div>
+
+      <div class="testimonio-card reveal">
+        <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>"Realizan trabajos excelentes, cumplieron en tiempo y forma. Son responsables. Recomendables 100%. Instalen paneles solares, dan resultado. Gracias."</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">GG</div>
+          <div>
+            <div class="autor-nombre">Ger Grosso</div>
+            <div class="autor-cargo">mayo 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio-card reveal">
+        <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>"Los llamé sin referencia alguna, y cumplieron en tiempo y forma. Realizaron un excelente trabajo, son serios y responsables. Recomendables."</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">RR</div>
+          <div>
+            <div class="autor-nombre">Roman Rc</div>
+            <div class="autor-cargo">abril 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio-card reveal">
+        <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>"Excelente trabajo realizado en empresa. Prolijo, puntual y adaptativo."</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">DN</div>
+          <div>
+            <div class="autor-nombre">Damian Romero Nuñez</div>
+            <div class="autor-cargo">abril 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonio-card reveal">
+        <div class="estrellas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>"Excelente atención y solvencia en la ejecución. Capacidad de respuesta, puntualidad, calidad, profesionalismo y valor. Servicio de reemplazo y actualización de tableros eléctricos."</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">GP</div>
+          <div>
+            <div class="autor-nombre">Gustavo Puche</div>
+            <div class="autor-cargo">noviembre 2020</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
