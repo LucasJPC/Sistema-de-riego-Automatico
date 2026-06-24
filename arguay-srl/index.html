@@ -197,15 +197,10 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      /* Reemplazar url() con la imagen real cuando esté disponible */
+      /* Foto real en assets/ tiene prioridad; Unsplash como fallback */
       background:
         url('assets/hero-bg.jpg') center/cover no-repeat,
-        linear-gradient(160deg,
-          #0a1628 0%,
-          #1a3a6e 35%,
-          #c27a1a 70%,
-          #e8a020 100%
-        );
+        url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1920&q=85') center/cover no-repeat;
       opacity: .28;
     }
     .hero-gradient {
@@ -1063,8 +1058,9 @@
         <div class="porque-img-wrap">
           <div style="
             width:100%; height:520px; border-radius:20px;
-            background: url('assets/porque.jpg') center/cover no-repeat,
-                        linear-gradient(145deg,#b8cde0 0%,#dce8f4 30%,#a0bcd4 55%,#2d6e90 100%);
+            background:
+              url('assets/porque.jpg') center/cover no-repeat,
+              url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=85') center/cover no-repeat;
           "></div>
           <div class="porque-badge">
             <div class="porque-badge-icon"><i class="fas fa-shield-alt"></i></div>
@@ -1094,8 +1090,9 @@
         <span class="proyecto-tag">Agropecuario</span>
         <div class="proyecto-img" style="
           height:300px;
-          background: url('assets/proyecto-agro.jpg') center/cover no-repeat,
-                      linear-gradient(155deg,#2d5a1b 0%,#4a8a30 30%,#7ab648 60%,#b8e07a 100%);
+          background:
+            url('assets/proyecto-agro.jpg') center/cover no-repeat,
+            url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
           transition: transform .5s cubic-bezier(.22,1,.36,1);
         "></div>
         <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
@@ -1107,8 +1104,9 @@
         <span class="proyecto-tag">Residencial</span>
         <div class="proyecto-img" style="
           height:300px;
-          background: url('assets/proyecto-residencial.jpg') center/cover no-repeat,
-                      linear-gradient(155deg,#b8cde0 0%,#dce8f4 35%,#a8c4dc 60%,#6a9cbc 100%);
+          background:
+            url('assets/proyecto-residencial.jpg') center/cover no-repeat,
+            url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
           transition: transform .5s cubic-bezier(.22,1,.36,1);
         "></div>
         <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
@@ -1120,8 +1118,9 @@
         <span class="proyecto-tag">Industrial</span>
         <div class="proyecto-img" style="
           height:300px;
-          background: url('assets/proyecto-industrial.jpg') center/cover no-repeat,
-                      linear-gradient(155deg,#3a4a58 0%,#5a7080 35%,#8aa0b0 60%,#b8ccd8 100%);
+          background:
+            url('assets/proyecto-industrial.jpg') center/cover no-repeat,
+            url('https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
           transition: transform .5s cubic-bezier(.22,1,.36,1);
         "></div>
         <div class="proyecto-overlay" style="opacity:0;transition:opacity .35s">
