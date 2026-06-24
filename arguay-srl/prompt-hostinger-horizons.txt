@@ -1,0 +1,72 @@
+Crea un sitio web profesional y moderno para ARGUAY SRL, empresa argentina de energía solar ubicada en Rosario, Santa Fe.
+
+ESTILO VISUAL:
+- Diseño tipo SaaS/corporativo moderno
+- Colores principales: azul oscuro (#0D1B3E), blanco y amarillo solar (#F5B800)
+- Tipografía limpia y sans-serif
+- Animaciones suaves al hacer scroll
+- Totalmente responsive (celular, tablet y escritorio)
+
+SECCIONES EN ESTE ORDEN:
+
+1. HEADER FIJO
+Logo "ARGUAY SRL" con ícono de panel solar. Menú con links a: Servicios, Proyectos, Proceso, Clientes, Contacto. Botón "Cotizar gratis" en amarillo.
+
+2. HERO (pantalla completa)
+Fondo oscuro con foto de campo de paneles solares al atardecer. Título grande: "Tu empresa o hogar funciona con el poder del sol". Subtítulo: "Reducí tu factura eléctrica hasta un 90% desde el primer mes." Dos botones: "Cotizar mi instalación" (amarillo) y "Ver proyectos" (contorno blanco). Debajo, 4 estadísticas: 150+ proyectos instalados, 90% ahorro promedio, 8 años de experiencia, 12 provincias.
+
+3. SERVICIOS (fondo gris claro)
+Título: "Soluciones solares a medida". Grid de 6 cards con ícono, título y descripción:
+- Residencial: sistemas on-grid para viviendas
+- Comercial e Industrial: plantas solares de gran escala
+- Agropecuario: bombeo solar y sistemas off-grid para el campo
+- Almacenamiento: baterías de litio y sistemas híbridos
+- Monitoreo inteligente: plataforma online en tiempo real
+- Mantenimiento: contratos de servicio y garantía extendida
+
+4. POR QUÉ ELEGIRNOS (fondo azul oscuro)
+Lado izquierdo: título "Instaladores certificados con respaldo técnico real", 4 puntos numerados del 01 al 04: Estudio técnico gratuito / Equipos de primera línea / Financiamiento disponible / Soporte post-instalación. Lado derecho: foto de instalación solar con badge "25 años de garantía en paneles".
+
+5. PROYECTOS (fondo blanco)
+Título: "Instalaciones en todo el país". Grid de 3 columnas con efecto hover que muestra overlay con descripción:
+- Agropecuario: bombeo solar en campo ganadero, Córdoba, 24 kWp
+- Residencial: casa clásica con paneles en techo inclinado, Buenos Aires, 12 kWp
+- Industrial: galpón/fábrica con paneles en terraza plana, Pilar, 500 kWp
+
+6. PROCESO (fondo blanco)
+Título: "De la idea a la energía en 4 pasos". 4 pasos en línea horizontal conectados:
+1. Diagnóstico (ícono calculadora)
+2. Propuesta (ícono planos)
+3. Instalación (ícono casco)
+4. ¡A generar! (ícono sol)
+
+7. OPINIONES (fondo gris claro)
+Título: "Lo que dicen nuestros clientes". Grid de 3 columnas con 7 cards de reseñas reales con 5 estrellas:
+- Hernán Armoao (feb 2025): "Excelente empresa de energías renovables! 100% recomendable! Te guían, te asesoran..."
+- Leandro Rodriguez (jun 2024): "Instalé paneles solares para bajar la factura de EPE, en el primer programa PROSUMIDORES..."
+- Virginia Borchese (jun 2024): "Instalé paneles solares, un éxito, responsabilidad, respuesta rápida, son serios."
+- Ger Grosso (may 2024): "Realizan trabajos excelentes, cumplieron en tiempo y forma. Son responsables."
+- Roman Rc (abr 2023): "Los llamé sin referencia alguna, y cumplieron en tiempo y forma."
+- Damian Romero Nuñez (abr 2023): "Excelente trabajo realizado en empresa. Prolijo, puntual y adaptativo."
+- Gustavo Puche (nov 2020): "Excelente atención y solvencia en la ejecución. Capacidad de respuesta, puntualidad, calidad."
+
+8. BANDA CTA (fondo degradado azul)
+Título: "¿Listo para generar tu propia energía?" Subtítulo: "Pedí tu cotización gratuita hoy. Nuestros ingenieros te contactan en menos de 24 horas." Dos botones: "Solicitar cotización" y "Hablar por WhatsApp".
+
+9. CONTACTO (fondo blanco)
+Dos columnas: izquierda con datos de contacto, derecha con formulario.
+Datos:
+- Dirección: Palestina 1188 (Rosario), Santa Fe, Argentina
+- Teléfono: +54 9 341 3160 223
+- Email: info@arguaysrl.com.ar
+- Horario: Lun-Vie 8:00-18:00 · Sáb 9:00-13:00
+Formulario con campos: Nombre, Apellido, Email, Teléfono, Tipo de proyecto (desplegable: Residencial/Comercial/Industrial/Agropecuario/Otro), Mensaje. Botón "Enviar consulta" en amarillo.
+
+10. FOOTER (fondo azul oscuro)
+4 columnas: descripción de la empresa + redes sociales / Servicios / Empresa / Contacto. Barra inferior con copyright "ARGUAY SRL" y año actual.
+
+ELEMENTOS ADICIONALES:
+- Botón flotante de WhatsApp (verde, esquina inferior derecha) con panel emergente que dice "¿Querés saber cuánto podés ahorrar con energía solar? ¡Te asesoramos gratis!" y link a wa.me/5493413160223
+- Botón "volver arriba" que aparece al hacer scroll
+- Header que cambia de transparente a azul oscuro al hacer scroll
+- SEO: meta título "ARGUAY SRL | Energía Solar en Argentina", meta descripción sobre paneles solares en Rosario
