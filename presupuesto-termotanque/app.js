@@ -1,6 +1,6 @@
-const IVA = 0.21;
+'use strict';
 
-// ── Logo upload ──────────────────────────────────────────────
+// ── Logo upload ─────────────────────────────────
 document.getElementById('logo-upload').addEventListener('change', function () {
   const file = this.files[0];
   if (!file) return;
@@ -13,162 +13,169 @@ document.getElementById('logo-upload').addEventListener('change', function () {
   reader.readAsDataURL(file);
 });
 
-// ── Agregar fila de material ─────────────────────────────────
-function addMaterial(containerId) {
-  const container = document.getElementById(containerId);
+// ── Agregar ítem ────────────────────────────────
+let itemCount = 0;
+
+function addItem() {
+  itemCount++;
+  const id = itemCount;
+  const container = document.getElementById('items-list');
   const row = document.createElement('div');
-  row.className = 'mat-row';
+  row.className = 'item-form-row';
+  row.id = `item-row-${id}`;
   row.innerHTML = `
-    <label>Descripción
-      <input type="text" class="mat-desc" placeholder="Ej: Caño cobre 3/4&quot;" />
-    </label>
-    <label>Cantidad
-      <input type="number" class="mat-qty" value="1" min="1" />
-    </label>
-    <label>Precio neto unit. ($)
-      <input type="number" class="mat-precio" placeholder="0.00" min="0" step="0.01" />
-    </label>
-    <button class="btn-del" onclick="this.parentElement.remove()" title="Eliminar">✕</button>
+    <textarea class="i-desc" rows="3" placeholder="Ej: *TERMOTANQUE SOLAR ATMOSFERICO 200 LITROS&#10;*CONTROLADOR ELECTRONICO&#10;*MATERIALES PLOMERIA"></textarea>
+    <input type="number" class="i-cant" value="1" min="1" />
+    <input type="number" class="i-precio" placeholder="0.00" min="0" step="0.01" />
+    <select class="i-iva">
+      <option value="0.21">21%</option>
+      <option value="0.105">10,5%</option>
+      <option value="0">0%</option>
+    </select>
+    <button class="btn-del-row" onclick="document.getElementById('item-row-${id}').remove()" title="Eliminar">✕</button>
   `;
   container.appendChild(row);
 }
 
-// ── Formatear moneda ─────────────────────────────────────────
-function fmt(n) {
-  return '$ ' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+// Primer ítem por defecto
+addItem();
+
+// ── Formateo ─────────────────────────────────────
+function fmtUSD(n) {
+  return 'USD ' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// ── Leer materiales de un contenedor ─────────────────────────
-function leerMateriales(containerId) {
-  const rows = document.querySelectorAll(`#${containerId} .mat-row`);
-  const items = [];
-  rows.forEach(row => {
-    const desc   = row.querySelector('.mat-desc').value.trim();
-    const qty    = parseFloat(row.querySelector('.mat-qty').value)    || 0;
-    const precio = parseFloat(row.querySelector('.mat-precio').value) || 0;
-    if (desc || precio > 0) items.push({ desc, qty, precio });
-  });
-  return items;
+function fmtARS(n) {
+  return '$ ' + n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
-// ── Construir fila de tabla ───────────────────────────────────
-function buildRow(qty, desc, precioUnit) {
-  const neto  = qty * precioUnit;
-  const iva   = neto * IVA;
-  const total = neto + iva;
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td class="center">${qty}</td>
-    <td>${desc}</td>
-    <td class="num">${fmt(precioUnit)}</td>
-    <td class="num">${fmt(iva)}</td>
-    <td class="num">${fmt(total)}</td>
-  `;
-  return { tr, neto, iva, total };
-}
-
-// ── Sección encabezado en tabla ───────────────────────────────
-function buildSectionHeader(text) {
-  const tr = document.createElement('tr');
-  tr.className = 'section-header';
-  tr.innerHTML = `<td colspan="5">${text}</td>`;
-  return tr;
-}
-
-// ── Generar presupuesto ───────────────────────────────────────
+// ── Generar presupuesto ──────────────────────────
 function generarPresupuesto() {
-  // Datos proveedor
-  document.getElementById('v-prov-empresa').textContent = val('prov-empresa');
-  document.getElementById('v-prov-cuit').textContent    = val('prov-cuit')    ? 'CUIT: ' + val('prov-cuit')    : '';
-  document.getElementById('v-prov-dir').textContent     = val('prov-dir');
-  document.getElementById('v-prov-tel').textContent     = val('prov-tel')     ? 'Tel: '  + val('prov-tel')     : '';
-  document.getElementById('v-prov-email').textContent   = val('prov-email');
-  document.getElementById('v-footer-empresa').textContent = val('prov-empresa') + (val('prov-tel') ? '  |  ' + val('prov-tel') : '') + (val('prov-email') ? '  |  ' + val('prov-email') : '');
+  /* — Empresa — */
+  setText('v-empresa', val('prov-empresa'));
+  setText('v-dir',     val('prov-dir'));
+  setText('v-ciudad',  val('prov-ciudad'));
+  setText('v-cotiza',  val('prov-cotiza') ? 'Cotiza: ' + val('prov-cotiza') : '');
+  setText('v-tel',     val('prov-tel')    ? 'Teléfono: ' + val('prov-tel') : '');
+  setText('v-cuit',    val('prov-cuit')   ? 'CUIT: ' + val('prov-cuit') : '');
 
-  // Número y fecha
-  document.getElementById('v-nro').textContent   = val('presup-nro') || '—';
-  document.getElementById('v-fecha').textContent = new Date().toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const emailEl = document.getElementById('v-email');
+  const emailVal = val('prov-email');
+  emailEl.textContent = emailVal;
+  emailEl.href = emailVal ? 'mailto:' + emailVal : '#';
 
-  // Datos cliente
-  document.getElementById('v-cli-nombre').textContent = val('cli-nombre');
-  document.getElementById('v-cli-cuit').textContent   = val('cli-cuit');
-  document.getElementById('v-cli-dir').textContent    = val('cli-dir');
-  document.getElementById('v-cli-tel').textContent    = val('cli-tel');
-  document.getElementById('v-cli-email').textContent  = val('cli-email');
+  const webEl = document.getElementById('v-web');
+  const webVal = val('prov-web');
+  webEl.textContent = webVal;
+  webEl.href = webVal ? 'https://' + webVal.replace(/^https?:\/\//, '') : '#';
 
-  // ── Tabla de ítems ────────────────────────────────────────
+  /* — Cliente — */
+  setText('v-cli-nombre',   val('cli-nombre'));
+  setText('v-cli-email',    val('cli-email'));
+  setText('v-cli-dir',      val('cli-dir'));
+  setText('v-cli-localidad', val('cli-localidad'));
+  setText('v-cli-provincia', val('cli-provincia'));
+  setText('v-cli-tel',      val('cli-tel'));
+
+  /* — Info bar — */
+  setText('v-nro-cliente',  val('nro-cliente'));
+  setText('v-nro-presup',   val('nro-presup'));
+  setText('v-proyecto',     val('proyecto'));
+  setText('v-valido-hasta', val('valido-hasta') || '-');
+  setText('v-fecha', new Date().toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+  /* — Título proyecto — */
+  setText('v-proj-titulo', val('proj-titulo'));
+
+  /* — Ítems — */
   const tbody = document.getElementById('v-items-body');
   tbody.innerHTML = '';
 
-  let totalNeto = 0;
-  let totalIva  = 0;
-  let totalFin  = 0;
+  let subTotalUSD = 0;
+  let iva105USD   = 0;
+  let iva21USD    = 0;
 
-  // 1. Termotanque Solar
-  const ttDesc   = val('tt-desc') || 'Termotanque Solar';
-  const ttLitros = val('tt-litros');
-  const ttQty    = parseFloat(document.getElementById('tt-qty').value)    || 1;
-  const ttPrecio = parseFloat(document.getElementById('tt-precio').value) || 0;
-  const ttLabel  = ttLitros ? `${ttDesc} – ${ttLitros} litros` : ttDesc;
+  document.querySelectorAll('.item-form-row').forEach(row => {
+    const desc   = row.querySelector('.i-desc').value.trim();
+    const cant   = parseFloat(row.querySelector('.i-cant').value)   || 0;
+    const precio = parseFloat(row.querySelector('.i-precio').value) || 0;
+    const ivaPct = parseFloat(row.querySelector('.i-iva').value)    || 0;
 
-  tbody.appendChild(buildSectionHeader('Termotanque Solar'));
-  const tt = buildRow(ttQty, ttLabel, ttPrecio);
-  tbody.appendChild(tt.tr);
-  totalNeto += tt.neto; totalIva += tt.iva; totalFin += tt.total;
+    const subTotal = cant * precio;
+    const ivaAmt   = subTotal * ivaPct;
+    const total    = subTotal + ivaAmt;
+    const pctLabel = ivaPct === 0.21 ? '21%' : ivaPct === 0.105 ? '10,5%' : '0%';
 
-  // 2. Materiales Termotanque
-  const matTT = leerMateriales('mat-tt-list');
-  if (matTT.length > 0) {
-    tbody.appendChild(buildSectionHeader('Materiales para el Termotanque'));
-    matTT.forEach(m => {
-      const r = buildRow(m.qty, m.desc, m.precio);
-      tbody.appendChild(r.tr);
-      totalNeto += r.neto; totalIva += r.iva; totalFin += r.total;
-    });
-  }
+    subTotalUSD += subTotal;
+    if (ivaPct === 0.21)  iva21USD  += ivaAmt;
+    if (ivaPct === 0.105) iva105USD += ivaAmt;
 
-  // 3. Materiales Gas y Electricidad
-  const matGE = leerMateriales('mat-ge-list');
-  if (matGE.length > 0) {
-    tbody.appendChild(buildSectionHeader('Materiales para Gas y Electricidad'));
-    matGE.forEach(m => {
-      const r = buildRow(m.qty, m.desc, m.precio);
-      tbody.appendChild(r.tr);
-      totalNeto += r.neto; totalIva += r.iva; totalFin += r.total;
-    });
-  }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="white-space:pre-wrap">${escHtml(desc)}</td>
+      <td class="center">${cant}</td>
+      <td class="right">${fmtUSD(precio)}</td>
+      <td class="right">${fmtUSD(subTotal)}</td>
+      <td class="center">${pctLabel}</td>
+      <td class="right">${fmtUSD(ivaAmt)}</td>
+      <td class="right">${fmtUSD(total)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
 
-  // 4. Otros ítems
-  const otros = leerMateriales('otros-list');
-  if (otros.length > 0) {
-    tbody.appendChild(buildSectionHeader('Otros Ítems'));
-    otros.forEach(m => {
-      const r = buildRow(m.qty, m.desc, m.precio);
-      tbody.appendChild(r.tr);
-      totalNeto += r.neto; totalIva += r.iva; totalFin += r.total;
-    });
-  }
+  const totalUSD = subTotalUSD + iva105USD + iva21USD;
+  const cotiz    = parseFloat(document.getElementById('cotizacion').value) || 0;
+  const totalARS = totalUSD * cotiz;
 
-  // Totales
-  document.getElementById('v-subtotal').textContent   = fmt(totalNeto);
-  document.getElementById('v-iva-total').textContent  = fmt(totalIva);
-  document.getElementById('v-total-final').textContent = fmt(totalFin);
-
-  // Notas
-  const notas = val('notas');
-  const notasSection = document.getElementById('v-notas-section');
-  if (notas) {
-    document.getElementById('v-notas').textContent = notas;
-    notasSection.classList.remove('hidden');
+  /* — Cotización — */
+  const cotBar = document.getElementById('v-cotizacion-bar');
+  if (cotiz > 0) {
+    cotBar.textContent = `USD 1  $  ${cotiz.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    cotBar.classList.remove('hidden');
   } else {
-    notasSection.classList.add('hidden');
+    cotBar.classList.add('hidden');
   }
 
-  // Mostrar
-  document.getElementById('presupuesto-view').classList.remove('hidden');
-  document.getElementById('presupuesto-view').scrollIntoView({ behavior: 'smooth' });
+  /* — Notas — */
+  const notasBlock = document.getElementById('v-notas-block');
+  const notasVal = val('notas');
+  if (notasVal) {
+    notasBlock.textContent = notasVal;
+    notasBlock.classList.remove('hidden');
+  } else {
+    notasBlock.classList.add('hidden');
+  }
+
+  /* — Totales — */
+  setText('v-subtotal', fmtUSD(subTotalUSD));
+  setText('v-iva105',   fmtUSD(iva105USD));
+  setText('v-iva21',    fmtUSD(iva21USD));
+  setText('v-total-usd', fmtUSD(totalUSD));
+  setText('v-total-ars', cotiz > 0 ? fmtARS(totalARS) : '—');
+
+  /* — Condiciones — */
+  setText('v-condiciones', val('condiciones'));
+
+  /* — Mostrar — */
+  const pres = document.getElementById('presupuesto');
+  pres.classList.remove('hidden');
+  pres.scrollIntoView({ behavior: 'smooth' });
 }
 
+// ── Helpers ──────────────────────────────────────
 function val(id) {
-  return document.getElementById(id).value.trim();
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function escHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
