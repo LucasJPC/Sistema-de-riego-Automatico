@@ -119,51 +119,77 @@ a { color: var(--link); text-decoration: none; }
   font-style: italic;
 }
 
-/* Items form table */
-.table-form-header {
+/* ── Item cards ── */
+.item-card {
+  border: 1px solid #d0d7e2;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #eef2f8;
+  padding: 7px 10px;
+  border-bottom: 1px solid #d0d7e2;
+}
+
+.item-header select {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid #b0bbd0;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--dark);
+}
+
+.item-body {
   display: grid;
-  grid-template-columns: 1fr 70px 140px 100px 36px;
-  gap: 6px;
-  font-size: 0.72rem;
+  grid-template-columns: 1fr 70px 150px 100px;
+  gap: 10px;
+  padding: 10px 12px 12px;
+}
+
+@media (max-width: 640px) {
+  .item-body { grid-template-columns: 1fr 1fr; }
+  .ib-desc   { grid-column: 1 / -1; }
+}
+
+.ib-label {
+  display: block;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  padding: 0 4px 4px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 
-.item-form-row {
-  display: grid;
-  grid-template-columns: 1fr 70px 140px 100px 36px;
-  gap: 6px;
-  align-items: start;
-  margin-bottom: 6px;
-}
-
-.item-form-row textarea,
-.item-form-row input {
+.item-body textarea,
+.item-body input[type="number"],
+.item-body select {
   width: 100%;
   padding: 6px 8px;
   border: 1px solid #c8cdd7;
   border-radius: 5px;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-family: inherit;
   background: #fafbfc;
+  color: var(--dark);
 }
 
-.item-form-row textarea { resize: vertical; min-height: 54px; }
-.item-form-row input:focus,
-.item-form-row textarea:focus { outline: none; border-color: var(--primary); }
+.item-body textarea { resize: vertical; min-height: 58px; }
 
-.item-form-row select {
-  width: 100%;
-  padding: 6px 8px;
-  border: 1px solid #c8cdd7;
-  border-radius: 5px;
-  font-size: 0.88rem;
-  background: #fafbfc;
+.item-body textarea:focus,
+.item-body input:focus,
+.item-body select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
 }
 
 .btn-del-row {

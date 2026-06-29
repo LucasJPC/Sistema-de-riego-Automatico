@@ -1,6 +1,21 @@
 'use strict';
 
-// ── Logo upload ─────────────────────────────────
+// ── Catálogo de productos ────────────────────────
+const CATALOGO = [
+  { desc: 'Termotanque solar 120 L',                               precio: 282.19 },
+  { desc: 'Termotanque solar 150-15AC',                            precio: 338.08 },
+  { desc: 'Termotanque solar 200-20AC',                            precio: 488.19 },
+  { desc: 'Termotanque solar 250-25AC',                            precio: 631.05 },
+  { desc: 'Termotanque solar 300-30AC',                            precio: 760.58 },
+  { desc: 'Controlador electrónico para resistencia de 2 kW',      precio:  52.04 },
+  { desc: 'Resistencia de cobre 2000 W, 60 cm, rosca 1¼"',        precio:  19.43 },
+  { desc: 'Válvula mezcladora termostática regulable 3/4"',        precio:  48.43 },
+  { desc: 'Ánodo de magnesio para tubo',                           precio:   6.64 },
+  { desc: 'Mano de obra',                                          precio: 387.00 },
+  { desc: 'Materiales hidráulicos y eléctricos',                   precio: 200.00 },
+];
+
+// ── Logo upload ──────────────────────────────────
 document.getElementById('logo-upload').addEventListener('change', function () {
   const file = this.files[0];
   if (!file) return;
@@ -13,6 +28,13 @@ document.getElementById('logo-upload').addEventListener('change', function () {
   reader.readAsDataURL(file);
 });
 
+// ── Construir opciones del catálogo ─────────────
+function buildCatalogOptions() {
+  return CATALOGO.map((p, i) =>
+    `<option value="${i}">${p.desc} — USD ${p.precio.toFixed(2)}</option>`
+  ).join('');
+}
+
 // ── Agregar ítem ────────────────────────────────
 let itemCount = 0;
 
@@ -20,21 +42,61 @@ function addItem() {
   itemCount++;
   const id = itemCount;
   const container = document.getElementById('items-list');
-  const row = document.createElement('div');
-  row.className = 'item-form-row';
-  row.id = `item-row-${id}`;
-  row.innerHTML = `
-    <textarea class="i-desc" rows="3" placeholder="Ej: *TERMOTANQUE SOLAR ATMOSFERICO 200 LITROS&#10;*CONTROLADOR ELECTRONICO&#10;*MATERIALES PLOMERIA"></textarea>
-    <input type="number" class="i-cant" value="1" min="1" />
-    <input type="number" class="i-precio" placeholder="0.00" min="0" step="0.01" />
-    <select class="i-iva">
-      <option value="0.21">21%</option>
-      <option value="0.105">10,5%</option>
-      <option value="0">0%</option>
-    </select>
-    <button class="btn-del-row" onclick="document.getElementById('item-row-${id}').remove()" title="Eliminar">✕</button>
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.id = `item-card-${id}`;
+  card.innerHTML = `
+    <div class="item-header">
+      <select class="i-catalog" onchange="applyCatalog(${id})">
+        <option value="">— Seleccionar del catálogo —</option>
+        ${buildCatalogOptions()}
+        <option value="custom">Personalizado (sin autocompletar)</option>
+      </select>
+      <button class="btn-del-row" onclick="document.getElementById('item-card-${id}').remove()" title="Eliminar ítem">✕</button>
+    </div>
+    <div class="item-body">
+      <div class="ib-desc">
+        <label class="ib-label">Artículo / Descripción</label>
+        <textarea class="i-desc" id="desc-${id}" rows="3" placeholder="Descripción del artículo..."></textarea>
+      </div>
+      <div class="ib-cant">
+        <label class="ib-label">Cant.</label>
+        <input type="number" class="i-cant" value="1" min="1" />
+      </div>
+      <div class="ib-precio">
+        <label class="ib-label">Precio unit. (USD)</label>
+        <input type="number" class="i-precio" id="precio-${id}" placeholder="0.00" min="0" step="0.01" />
+      </div>
+      <div class="ib-iva">
+        <label class="ib-label">% IVA</label>
+        <select class="i-iva">
+          <option value="0.21">21%</option>
+          <option value="0.105">10,5%</option>
+          <option value="0">0%</option>
+        </select>
+      </div>
+    </div>
   `;
-  container.appendChild(row);
+  container.appendChild(card);
+}
+
+// ── Autocompletar desde catálogo ─────────────────
+function applyCatalog(id) {
+  const card    = document.getElementById(`item-card-${id}`);
+  const selVal  = card.querySelector('.i-catalog').value;
+  const descEl  = document.getElementById(`desc-${id}`);
+  const precioEl = document.getElementById(`precio-${id}`);
+
+  if (selVal === '' || selVal === 'custom') {
+    descEl.value   = '';
+    precioEl.value = '';
+    return;
+  }
+
+  const item = CATALOGO[parseInt(selVal)];
+  if (!item) return;
+  descEl.value   = item.desc;
+  precioEl.value = item.precio.toFixed(2);
 }
 
 // Primer ítem por defecto
@@ -51,7 +113,7 @@ function fmtARS(n) {
 
 // ── Generar presupuesto ──────────────────────────
 function generarPresupuesto() {
-  /* — Empresa — */
+  /* Empresa */
   setText('v-empresa', val('prov-empresa'));
   setText('v-dir',     val('prov-dir'));
   setText('v-ciudad',  val('prov-ciudad'));
@@ -69,25 +131,27 @@ function generarPresupuesto() {
   webEl.textContent = webVal;
   webEl.href = webVal ? 'https://' + webVal.replace(/^https?:\/\//, '') : '#';
 
-  /* — Cliente — */
-  setText('v-cli-nombre',   val('cli-nombre'));
-  setText('v-cli-email',    val('cli-email'));
-  setText('v-cli-dir',      val('cli-dir'));
+  /* Cliente */
+  setText('v-cli-nombre',    val('cli-nombre'));
+  setText('v-cli-email',     val('cli-email'));
+  setText('v-cli-dir',       val('cli-dir'));
   setText('v-cli-localidad', val('cli-localidad'));
   setText('v-cli-provincia', val('cli-provincia'));
-  setText('v-cli-tel',      val('cli-tel'));
+  setText('v-cli-tel',       val('cli-tel'));
 
-  /* — Info bar — */
+  /* Info bar */
   setText('v-nro-cliente',  val('nro-cliente'));
   setText('v-nro-presup',   val('nro-presup'));
   setText('v-proyecto',     val('proyecto'));
   setText('v-valido-hasta', val('valido-hasta') || '-');
-  setText('v-fecha', new Date().toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+  setText('v-fecha', new Date().toLocaleDateString('es-AR', {
+    day: '2-digit', month: '2-digit', year: 'numeric'
+  }));
 
-  /* — Título proyecto — */
+  /* Título proyecto */
   setText('v-proj-titulo', val('proj-titulo'));
 
-  /* — Ítems — */
+  /* Ítems */
   const tbody = document.getElementById('v-items-body');
   tbody.innerHTML = '';
 
@@ -95,11 +159,11 @@ function generarPresupuesto() {
   let iva105USD   = 0;
   let iva21USD    = 0;
 
-  document.querySelectorAll('.item-form-row').forEach(row => {
-    const desc   = row.querySelector('.i-desc').value.trim();
-    const cant   = parseFloat(row.querySelector('.i-cant').value)   || 0;
-    const precio = parseFloat(row.querySelector('.i-precio').value) || 0;
-    const ivaPct = parseFloat(row.querySelector('.i-iva').value)    || 0;
+  document.querySelectorAll('.item-card').forEach(card => {
+    const desc   = card.querySelector('.i-desc').value.trim();
+    const cant   = parseFloat(card.querySelector('.i-cant').value)   || 0;
+    const precio = parseFloat(card.querySelector('.i-precio').value) || 0;
+    const ivaPct = parseFloat(card.querySelector('.i-iva').value)    || 0;
 
     const subTotal = cant * precio;
     const ivaAmt   = subTotal * ivaPct;
@@ -127,16 +191,18 @@ function generarPresupuesto() {
   const cotiz    = parseFloat(document.getElementById('cotizacion').value) || 0;
   const totalARS = totalUSD * cotiz;
 
-  /* — Cotización — */
+  /* Cotización */
   const cotBar = document.getElementById('v-cotizacion-bar');
   if (cotiz > 0) {
-    cotBar.textContent = `USD 1  $  ${cotiz.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    cotBar.textContent = `USD 1  $  ${cotiz.toLocaleString('es-AR', {
+      minimumFractionDigits: 2, maximumFractionDigits: 2
+    })}`;
     cotBar.classList.remove('hidden');
   } else {
     cotBar.classList.add('hidden');
   }
 
-  /* — Notas — */
+  /* Notas */
   const notasBlock = document.getElementById('v-notas-block');
   const notasVal = val('notas');
   if (notasVal) {
@@ -146,17 +212,17 @@ function generarPresupuesto() {
     notasBlock.classList.add('hidden');
   }
 
-  /* — Totales — */
-  setText('v-subtotal', fmtUSD(subTotalUSD));
-  setText('v-iva105',   fmtUSD(iva105USD));
-  setText('v-iva21',    fmtUSD(iva21USD));
-  setText('v-total-usd', fmtUSD(totalUSD));
-  setText('v-total-ars', cotiz > 0 ? fmtARS(totalARS) : '—');
+  /* Totales */
+  setText('v-subtotal',   fmtUSD(subTotalUSD));
+  setText('v-iva105',     fmtUSD(iva105USD));
+  setText('v-iva21',      fmtUSD(iva21USD));
+  setText('v-total-usd',  fmtUSD(totalUSD));
+  setText('v-total-ars',  cotiz > 0 ? fmtARS(totalARS) : '—');
 
-  /* — Condiciones — */
+  /* Condiciones */
   setText('v-condiciones', val('condiciones'));
 
-  /* — Mostrar — */
+  /* Mostrar */
   const pres = document.getElementById('presupuesto');
   pres.classList.remove('hidden');
   pres.scrollIntoView({ behavior: 'smooth' });
