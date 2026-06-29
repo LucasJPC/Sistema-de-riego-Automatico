@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador - Termotanque Solar</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== EDITOR (solo pantalla) ===== -->
+  <div id="editor" class="no-print">
+
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="header-brand">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="7" fill="#FDD835"/>
+            <g stroke="#FDD835" stroke-width="2.2" stroke-linecap="round">
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="16" y1="26" x2="16" y2="30"/>
+              <line x1="2" y1="16" x2="6" y2="16"/>
+              <line x1="26" y1="16" x2="30" y2="16"/>
+              <line x1="5.5" y1="5.5" x2="8.4" y2="8.4"/>
+              <line x1="23.6" y1="23.6" x2="26.5" y2="26.5"/>
+              <line x1="26.5" y1="5.5" x2="23.6" y2="8.4"/>
+              <line x1="8.4" y1="23.6" x2="5.5" y2="26.5"/>
+            </g>
+          </svg>
+          <div>
+            <h1>Cotizador Solar</h1>
+            <span>Presupuestos de Termotanque Solar</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button onclick="resetForm()" class="btn-secondary">+ Nuevo Presupuesto</button>
+          <button onclick="generatePrint()" class="btn-primary">&#128438; Imprimir / PDF</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="editor-layout">
+
+      <!-- ===== COLUMNA IZQUIERDA: Mis Datos + Cliente + Config ===== -->
+      <aside class="editor-sidebar">
+
+        <!-- Mis Datos -->
+        <section class="card">
+          <h2 class="card-title">
+            Mis Datos
+            <span class="autosave-badge">&#10003; Se guarda automáticamente</span>
+          </h2>
+
+          <div class="logo-section">
+            <label class="field-label">Logo de la Empresa</label>
+            <div class="logo-upload" id="logoUpload" onclick="document.getElementById('logoInput').click()" title="Haz clic para subir un logo">
+              <img id="logoPreview" src="" alt="Logo de la empresa" style="display:none">
+              <div id="logoPlaceholder" class="logo-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>Subir logo</span>
+                <span class="logo-hint">PNG, JPG, SVG</span>
+              </div>
+              <button class="logo-remove" id="logoRemoveBtn" style="display:none" onclick="removeLogo(event)" title="Quitar logo">&#10005;</button>
+            </div>
+            <input type="file" id="logoInput" accept="image/*" onchange="handleLogo(event)" style="display:none">
+          </div>
+
+          <div class="form-fields">
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="myName">Razón Social / Nombre</label>
+                <input id="myName" type="text" placeholder="Mi Empresa S.A.">
+              </div>
+              <div class="field">
+                <label class="field-label" for="myCuit">CUIT</label>
+                <input id="myCuit" type="text" placeholder="20-12345678-9">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="myAddress">Dirección</label>
+              <input id="myAddress" type="text" placeholder="Av. Siempreviva 742, Buenos Aires">
+            </div>
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="myPhone">Teléfono</label>
+                <input id="myPhone" type="text" placeholder="+54 11 1234-5678">
+              </div>
+              <div class="field">
+                <label class="field-label" for="myEmail">Email</label>
+                <input id="myEmail" type="email" placeholder="info@empresa.com">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="myIvaCondition">Condición IVA</label>
+              <select id="myIvaCondition">
+                <option value="Responsable Inscripto">Responsable Inscripto</option>
+                <option value="Monotributista">Monotributista</option>
+                <option value="Exento">Exento</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Datos del Cliente -->
+        <section class="card">
+          <h2 class="card-title">Datos del Cliente</h2>
+          <div class="form-fields">
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="clientName">Nombre / Razón Social</label>
+                <input id="clientName" type="text" placeholder="Cliente S.A.">
+              </div>
+              <div class="field">
+                <label class="field-label" for="clientCuit">CUIT / DNI</label>
+                <input id="clientCuit" type="text" placeholder="20-12345678-9">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="clientAddress">Dirección</label>
+              <input id="clientAddress" type="text" placeholder="Dirección del cliente">
+            </div>
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="clientPhone">Teléfono</label>
+                <input id="clientPhone" type="text" placeholder="+54 11 1234-5678">
+              </div>
+              <div class="field">
+                <label class="field-label" for="clientEmail">Email</label>
+                <input id="clientEmail" type="email" placeholder="cliente@email.com">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="clientIvaCondition">Condición IVA</label>
+              <select id="clientIvaCondition">
+                <option value="Consumidor Final">Consumidor Final</option>
+                <option value="Responsable Inscripto">Responsable Inscripto</option>
+                <option value="Monotributista">Monotributista</option>
+                <option value="Exento">Exento</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Datos del Presupuesto -->
+        <section class="card">
+          <h2 class="card-title">Datos del Presupuesto</h2>
+          <div class="form-fields">
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="quoteNumber">N° Presupuesto</label>
+                <input id="quoteNumber" type="text" placeholder="0001">
+              </div>
+              <div class="field">
+                <label class="field-label" for="quoteDate">Fecha</label>
+                <input id="quoteDate" type="date">
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="field">
+                <label class="field-label" for="validityDays">Válido por (días)</label>
+                <input id="validityDays" type="number" value="15" min="1">
+              </div>
+              <div class="field">
+                <label class="field-label" for="ivaPercent">% IVA</label>
+                <input id="ivaPercent" type="number" value="21" min="0" max="100" step="0.5">
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- ===== COLUMNA DERECHA: Ítems ===== -->
+      <main class="editor-main">
+
+        <div id="sectionsContainer">
+          <!-- Renderizado por JS -->
+        </div>
+
+        <!-- Notas -->
+        <section class="card">
+          <h2 class="card-title">Notas y Condiciones</h2>
+          <div class="field">
+            <textarea id="notes" rows="3" placeholder="Ej: Forma de pago: 50% anticipo y 50% contra entrega. Garantía de equipos: 12 meses.&#10;Los precios no incluyen fletes a destinos fuera del radio de la ciudad."></textarea>
+          </div>
+        </section>
+
+        <!-- Totales -->
+        <section class="card totals-card">
+          <div class="totals-table">
+            <div class="totals-row">
+              <span class="totals-label">Subtotal (sin IVA)</span>
+              <span id="subtotalDisplay" class="totals-value">$ 0,00</span>
+            </div>
+            <div class="totals-row iva-row">
+              <span class="totals-label">IVA (<span id="ivaPctLabel">21</span>%)</span>
+              <span id="ivaDisplay" class="totals-value">$ 0,00</span>
+            </div>
+            <div class="totals-row grand-row">
+              <span class="totals-label">TOTAL</span>
+              <span id="totalDisplay" class="totals-value">$ 0,00</span>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ===== VISTA DE IMPRESIÓN ===== -->
+  <div id="printView" class="print-only">
+    <!-- Generado por generatePrint() en app.js -->
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
