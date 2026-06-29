@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presupuesto - Termotanque Solar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    <h1 class="page-title">Generador de Presupuesto - Termotanque Solar</h1>
+
+    <!-- Formulario de datos -->
+    <div class="form-section no-print">
+      <div class="form-grid">
+        <!-- Datos del proveedor -->
+        <div class="form-card">
+          <h2>Mis Datos (Proveedor)</h2>
+          <label>Empresa / Nombre<input id="prov-empresa" type="text" placeholder="Ej: Solar Tech SRL" /></label>
+          <label>CUIT<input id="prov-cuit" type="text" placeholder="Ej: 30-12345678-9" /></label>
+          <label>Dirección<input id="prov-dir" type="text" placeholder="Ej: Av. Solar 1234, Buenos Aires" /></label>
+          <label>Teléfono<input id="prov-tel" type="text" placeholder="Ej: +54 11 1234-5678" /></label>
+          <label>Email<input id="prov-email" type="email" placeholder="Ej: contacto@empresa.com" /></label>
+          <label>Logo de la empresa (imagen)
+            <input id="logo-upload" type="file" accept="image/*" />
+          </label>
+        </div>
+
+        <!-- Datos del cliente -->
+        <div class="form-card">
+          <h2>Datos del Cliente</h2>
+          <label>Nombre / Razón Social<input id="cli-nombre" type="text" placeholder="Ej: Juan Pérez" /></label>
+          <label>CUIT / DNI<input id="cli-cuit" type="text" placeholder="Ej: 20-98765432-1" /></label>
+          <label>Dirección<input id="cli-dir" type="text" placeholder="Ej: Calle Falsa 123, CABA" /></label>
+          <label>Teléfono<input id="cli-tel" type="text" placeholder="Ej: +54 11 9876-5432" /></label>
+          <label>Email<input id="cli-email" type="email" placeholder="Ej: cliente@mail.com" /></label>
+          <label>Número de Presupuesto<input id="presup-nro" type="text" placeholder="Ej: 0001" /></label>
+        </div>
+      </div>
+
+      <!-- Ítems del presupuesto -->
+      <div class="form-card full-width">
+        <h2>Ítems del Presupuesto</h2>
+
+        <!-- Termotanque Solar -->
+        <div class="item-section">
+          <h3>Termotanque Solar</h3>
+          <div class="item-row">
+            <label>Descripción<input id="tt-desc" type="text" value="Termotanque Solar" /></label>
+            <label>Litros<input id="tt-litros" type="number" placeholder="200" min="1" /></label>
+            <label>Cantidad<input id="tt-qty" type="number" value="1" min="1" /></label>
+            <label>Precio unitario neto ($)<input id="tt-precio" type="number" placeholder="0.00" min="0" step="0.01" /></label>
+          </div>
+        </div>
+
+        <!-- Materiales Termotanque -->
+        <div class="item-section">
+          <h3>Materiales para el Termotanque</h3>
+          <div id="mat-tt-list"></div>
+          <button class="btn-add" onclick="addMaterial('mat-tt-list')">+ Agregar material</button>
+        </div>
+
+        <!-- Materiales Gas y Electricidad -->
+        <div class="item-section">
+          <h3>Materiales para Gas y Electricidad</h3>
+          <div id="mat-ge-list"></div>
+          <button class="btn-add" onclick="addMaterial('mat-ge-list')">+ Agregar material</button>
+        </div>
+
+        <!-- Otros ítems -->
+        <div class="item-section">
+          <h3>Otros Ítems</h3>
+          <div id="otros-list"></div>
+          <button class="btn-add" onclick="addMaterial('otros-list')">+ Agregar ítem</button>
+        </div>
+
+        <!-- Notas adicionales -->
+        <div class="item-section">
+          <h3>Notas / Condiciones</h3>
+          <textarea id="notas" rows="3" placeholder="Forma de pago, tiempo de instalación, garantía, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-preview" onclick="generarPresupuesto()">Vista previa</button>
+        <button class="btn-print" onclick="window.print()">Imprimir / Guardar PDF</button>
+      </div>
+    </div>
+
+    <!-- Vista del presupuesto -->
+    <div id="presupuesto-view" class="presupuesto hidden">
+      <header class="pres-header">
+        <div class="pres-left">
+          <div class="pres-empresa-info">
+            <p id="v-prov-empresa" class="empresa-nombre"></p>
+            <p id="v-prov-cuit"></p>
+            <p id="v-prov-dir"></p>
+            <p id="v-prov-tel"></p>
+            <p id="v-prov-email"></p>
+          </div>
+        </div>
+        <div class="pres-right">
+          <img id="v-logo" src="" alt="Logo empresa" class="logo hidden" />
+          <div class="pres-title-block">
+            <h2>PRESUPUESTO</h2>
+            <p>N°: <strong id="v-nro"></strong></p>
+            <p>Fecha: <strong id="v-fecha"></strong></p>
+          </div>
+        </div>
+      </header>
+
+      <div class="pres-divider"></div>
+
+      <section class="pres-cliente">
+        <h3>Datos del Cliente</h3>
+        <div class="cliente-grid">
+          <p><span class="label">Cliente:</span> <span id="v-cli-nombre"></span></p>
+          <p><span class="label">CUIT/DNI:</span> <span id="v-cli-cuit"></span></p>
+          <p><span class="label">Dirección:</span> <span id="v-cli-dir"></span></p>
+          <p><span class="label">Teléfono:</span> <span id="v-cli-tel"></span></p>
+          <p><span class="label">Email:</span> <span id="v-cli-email"></span></p>
+        </div>
+      </section>
+
+      <div class="pres-divider"></div>
+
+      <section class="pres-items">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-cant">Cant.</th>
+              <th class="col-desc">Descripción</th>
+              <th class="col-unit">Precio Neto Unit.</th>
+              <th class="col-iva">IVA (21%)</th>
+              <th class="col-total">Total</th>
+            </tr>
+          </thead>
+          <tbody id="v-items-body"></tbody>
+          <tfoot>
+            <tr class="subtotal-row">
+              <td colspan="4" class="text-right">Subtotal (neto):</td>
+              <td id="v-subtotal"></td>
+            </tr>
+            <tr class="iva-row">
+              <td colspan="4" class="text-right">IVA total (21%):</td>
+              <td id="v-iva-total"></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4" class="text-right">TOTAL:</td>
+              <td id="v-total-final"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <div id="v-notas-section" class="pres-notas hidden">
+        <h3>Notas y Condiciones</h3>
+        <p id="v-notas"></p>
+      </div>
+
+      <footer class="pres-footer">
+        <p>Presupuesto válido por 15 días a partir de la fecha de emisión.</p>
+        <p id="v-footer-empresa"></p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
